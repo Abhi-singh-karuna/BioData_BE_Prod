@@ -10,7 +10,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: PasswordManager
+      MYSQL_DATABASE: bio-data
       MYSQL_USER: user
       MYSQL_PASSWORD: userpassword
     networks:

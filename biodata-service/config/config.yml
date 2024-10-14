@@ -1,0 +1,74 @@
+general:
+  logger:
+    level: "debug"
+  router:
+    port: 8080
+  email:
+    enable: false
+
+sql:
+  write:
+    host: "localhost"
+    port: 3306
+    database: "bio-data"
+    user: "root"
+    password: 123456789
+
+# redis:
+#   write:
+#     host: "localhost"
+#     port: "6379"
+#     database: 1
+#     password: ""
+
+CurrentLanguage: "en"
+AccessTokenSecret: "AccessTokenSecret"
+RefreshTokenSecret: "RefreshTokenSecret"
+SendGridAPIKey: "key"
+SendGridFromEmail: "mail"
+SendGridFromName: "PAES"
+UniDocMeteredKey: "06key"
+
+WebURL: "Google.com/PAES"
+
+ApplicationMessages:
+  en:
+    DuplicateUser:
+      Key: "DUPLICATE_USER"
+      Message: "User with the same email id already exist."
+    UserNotFound:
+      Key: "USER_NOT_FOUND"
+      Message: "User with this email id not exist."
+    InvalidLoginCredentials:
+      Key: "INVALID_LOGIN_CREDENTIALS"
+      Message: "Invalid login credentials."
+    internalServerError:
+      key: "INTERNAL_SERVER_ERROR"
+      message: "An internal server error occurred. Please try again later."
+    badRequestError:
+      key: "BAD_REQUEST_ERROR"
+      message: "Invalid request. Please check the input data."
+    validationError:
+      key: "VALIDATION_ERROR"
+      message: "Validation failed. Please provide valid data."
+    EmptyTokenError:
+      key: "EMPTY_TOKEN_ERROR"
+      message: "No token provided in header."   
+    InvalidTokenError:
+      key: "INVALID_TOKEN_ERROR"
+      message: "Invalid token." 
+    ExpireTokenError:
+      key: "EXpire_TOKEN_ERROR"
+      message: " token is Expired."   
+    UserIdEmptyError:
+      key: "USER_ID_EMPTY_ERROR"
+      message: "User Id Is Empty(middleware)."  
+    UserNotVerified:
+      key: "USER_NOT_VERIFIED"
+      message: "Sill User Email is Not Verified (Middleware)."    
+    UserAlreadyVerified:
+      key: "USER_ALREADY_VERIFIED"
+      message: "User Already Verified."  
+    OtpUnMatchError:  
+      key: "OTP_UN_MATCH_ERROR"
+      message: "Otp mismatch."  

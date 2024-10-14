@@ -1,4 +1,6 @@
 .DS_Store
+project-database/db-data/mysql-biodata/
+project-database/init.sql
 
 
 

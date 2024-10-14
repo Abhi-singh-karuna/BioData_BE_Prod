@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  biodata-service:
+    build:
+      context: ./../biodata-service
+      dockerfile: ./../biodata-service/biodata-service.dockerfile
+    restart: always
+    container_name: biodata-service
+    ports:
+      - "8090:8080"
+    deploy: # user for docker swarm deployment
+      mode: replicated
+      replicas: 1
+    environment:
+      # updated for single MySQL service
+      ABHI_SQL_WRITE_HOST: mysql-biodata
+      # ABHI_SQL_WRITE_HOST: mysql-pass
+      ABHI_SQL_WRITE_PORT: 3306
+      ABHI_SQL_WRITE_DATABASE: PasswordManager
+      ABHI_SQL_WRITE_USER: user
+      ABHI_SQL_WRITE_PASSWORD: userpassword
+      # general
+      ABHI_GENERAL_ROUTER_PORT: 8080
+      ABHI_GENERAL_EMAIL_ENABLE: false
+      # Redis
+      # ABHI_REDIS_WRITE_HOST: redis
+      # ABHI_REDIS_WRITE_PORT: 6379
+      # ABHI_REDIS_WRITE_DATABASE: 1
+    networks: #used this is beuause it used the datbase from other container
+      - my-external-network
+
+
+networks:
+  my-external-network:
+    external: true

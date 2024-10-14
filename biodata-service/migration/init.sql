@@ -1,0 +1,51 @@
+DROP TABLE IF EXISTS `visit-bio-data`;
+
+CREATE TABLE IF NOT EXISTS `visit-bio-data` (
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `WEBSITE_NAME` VARCHAR(255) NOT NULL,
+    `VISIT_COUNT` INT NOT NULL DEFAULT 0,
+    `CLICK_GENERATE_COUNT` INT NOT NULL DEFAULT 0,
+    `FILL_FORM_COUNT` INT NOT NULL DEFAULT 0,
+    `DOWNLOAD_BIO_DATA_COUNT` INT NOT NULL DEFAULT 0,
+    `UPDATED_AT` DATETIME DEFAULT (UTC_TIMESTAMP),
+    PRIMARY KEY (`ID`)
+);
+
+-- // ex: 1- Visit Count , 2 :- ClickGenerateCount , 3 :- Fill Form Count , 4 :- download bio-data count
+
+
+INSERT INTO `visit-bio-data` (WEBSITE_NAME, VISIT_COUNT, CLICK_GENERATE_COUNT, FILL_FORM_COUNT, DOWNLOAD_BIO_DATA_COUNT, UPDATED_AT)
+SELECT 'bio-data', 0, 0, 0, 0,  UTC_TIMESTAMP()
+WHERE NOT EXISTS (
+    SELECT 1 FROM `visit-bio-data` WHERE WEBSITE_NAME = 'bio-data'
+);
+
+
+
+DROP PROCEDURE IF EXISTS sp_CountVisitWebsite;
+
+CREATE PROCEDURE sp_CountVisitWebsite(IN ID INT)
+BEGIN
+    IF ID = 1 THEN
+        UPDATE `visit-bio-data` 
+        SET VISIT_COUNT = VISIT_COUNT + 1, 
+        UPDATED_AT = UTC_TIMESTAMP() 
+    WHERE WEBSITE_NAME = 'bio-data';
+    ELSEIF ID = 2 THEN
+        UPDATE `visit-bio-data` 
+        SET CLICK_GENERATE_COUNT = CLICK_GENERATE_COUNT + 1, 
+        UPDATED_AT = UTC_TIMESTAMP() 
+    WHERE WEBSITE_NAME = 'bio-data';
+    ELSEIF ID = 3 THEN
+        UPDATE `visit-bio-data` 
+        SET FILL_FORM_COUNT = FILL_FORM_COUNT + 1, 
+        UPDATED_AT = UTC_TIMESTAMP() 
+    WHERE WEBSITE_NAME = 'bio-data';
+    ELSEIF ID = 4 THEN
+        UPDATE `visit-bio-data` 
+        SET DOWNLOAD_BIO_DATA_COUNT = DOWNLOAD_BIO_DATA_COUNT + 1, 
+        UPDATED_AT = UTC_TIMESTAMP() 
+    WHERE WEBSITE_NAME = 'bio-data';
+    END IF;
+END;
+

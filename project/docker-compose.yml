@@ -16,9 +16,9 @@ services:
     environment:
       # updated for single MySQL service
       ABHI_SQL_WRITE_HOST: mysql-biodata
-      # ABHI_SQL_WRITE_HOST: mysql-pass
+      # ABHI_SQL_WRITE_HOST: mysql-biodata
       ABHI_SQL_WRITE_PORT: 3306
-      ABHI_SQL_WRITE_DATABASE: PasswordManager
+      ABHI_SQL_WRITE_DATABASE: bio-data
       ABHI_SQL_WRITE_USER: user
       ABHI_SQL_WRITE_PASSWORD: userpassword
       # general

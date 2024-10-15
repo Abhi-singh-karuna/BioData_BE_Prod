@@ -1,4 +1,13 @@
--- DROP TABLE IF EXISTS `visit-bio-data`;
+-- Add super user 
+GRANT SUPER ON *.* TO 'user'@'%';
+FLUSH PRIVILEGES;
+
+-- Set time zone
+SET GLOBAL time_zone = 'Asia/Kolkata';
+SET time_zone = 'Asia/Kolkata';
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS `Application` (

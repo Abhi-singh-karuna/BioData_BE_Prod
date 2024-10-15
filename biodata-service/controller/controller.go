@@ -84,5 +84,142 @@ func (c *Controller) CountVisitWebsite(ctx *gin.Context) {
 
 	go c.userUseCase.CountVisitWebsite(&count)
 
-	ctx.Status(http.StatusNoContent) 
+	ctx.Status(http.StatusNoContent)
+}
+
+// GetBioDataTrackerInfo
+func (c *Controller) GetBioDataTrackerInfo(ctx *gin.Context) {
+
+	info, err := c.userUseCase.GetBioDataTrackerInfo()
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, info)
+}
+
+// GetWeeklyData
+func (c *Controller) GetWeeklyData(ctx *gin.Context) {
+	var req model.WeeklyDataReq
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	weeklyData, err := c.userUseCase.GetWeeklyData(req)
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, weeklyData)
+}
+
+func (c *Controller) GetPageBufferPercentages(ctx *gin.Context) {
+
+	var req model.WeeklyDataReq
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	buffer, err := c.userUseCase.GetPageBufferPercentages(req)
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, buffer)
+}
+
+// Subscribe
+func (c *Controller) Subscribe(ctx *gin.Context) {
+
+	var req model.SubscribeReq
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	err := c.userUseCase.Subscribe(req)
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.Status(http.StatusNoContent)
+}
+
+// GetAllSubscribers
+func (c *Controller) GetAllSubscribers(ctx *gin.Context) {
+	var req model.GetSubscriberReq
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	subscribers, err := c.userUseCase.GetAllSubscribers(req)
+
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, subscribers)
+}
+
+// CalculatePercentageChange
+
+func (c *Controller) CalculatePercentageChange(ctx *gin.Context) {
+	var req model.DashboardData
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	percentage, err := c.userUseCase.CalculatePercentageChange(req)
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, percentage)
+}
+
+// GetCountsWithPercentage
+
+func (c *Controller) GetCountsWithPercentage(ctx *gin.Context) {
+	var req model.Date
+
+	if err := _http.ReadRequest(ctx, &req); err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(http.StatusBadRequest, ParseMessage(err.Error()))
+		return
+	}
+
+	percentage, err := c.userUseCase.GetCountsWithPercentage(req)
+	if err != nil {
+		_http.LogResponseError(ctx, err)
+		ctx.JSON(httpErrors.ErrorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, percentage)
 }

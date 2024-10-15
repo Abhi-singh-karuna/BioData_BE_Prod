@@ -36,5 +36,24 @@ func NewRouter(db *sql.DB,cfg *config.Config, validate *validator.Validate, logg
 
 	verifiedUser.POST("/count", userController.CountVisitWebsite)
 
+	verifiedUser.GET("/biodata", userController.GetBioDataTrackerInfo)
+
+	verifiedUser.POST("/weekly", userController.GetWeeklyData)
+
+	verifiedUser.POST("/buffer", userController.GetPageBufferPercentages)
+
+	// subscribe 
+
+	verifiedUser.POST("/subscribe", userController.Subscribe)
+
+	// get all subscribers
+	verifiedUser.POST("/subscribers", userController.GetAllSubscribers)
+
+	verifiedUser.POST("/dashboard-data", userController.CalculatePercentageChange)
+
+	// sp_GetCountsWithPercentage
+
+	verifiedUser.POST("/count-data", userController.GetCountsWithPercentage)
+
 	return r
 }

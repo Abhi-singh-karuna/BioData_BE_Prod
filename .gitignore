@@ -12,3 +12,9 @@ project-database/init.sql
 Control + -
 -- Navigate to Next Location:
 Control + Shift + -
+
+
+// on ec2 
+
+// run once then no sudo is needed 
+sudo chmod 777 /var/run/docker.sock
